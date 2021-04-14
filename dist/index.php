@@ -4,7 +4,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
-        <meta name="author" content="" />
+	<meta name="author" content="" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>MoM Development Navigator</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="https://cdn.freebiesupply.com/logos/large/2x/mercer-bears-logo-png-transparent.png" />
@@ -39,6 +40,25 @@ $con = new mysqli($servername, $username, $password, $dbname);
 if ($con ->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
+$namechange = "SET NAMES 'utf8mb4'";
+$con->query($namechange);
+
+if(isset($_POST["name"]))
+{
+$name = $_POST["name"];
+$lat = $_POST["lat"];
+$lng = $_POST["lng"];
+$comment = htmlentities($_POST["comment"]);
+$professor = htmlentities($_POST["professor"]);
+$link = $_POST["link"];
+$sql = "INSERT INTO MapMarkers (Name, Lat, Lng, Comment, Professor, Link)
+		VALUES ('$name', '$lat', '$lng', '$comment', '$professor', '$link')";
+
+if ($con->query($sql) === TRUE) {
+		echo "New record created successfully";
+}
+}
+
 
 $query = "SELECT * FROM MapMarkers";
 $result = $con->query($query);
@@ -94,12 +114,41 @@ $result = $con->query($query);
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-		    <div class="text-center"><p class="lead">International Development is a broad concept. Firstly, it gives the idea that different countries around the world are at different "levels" of development, and that over time these countries will progress with the assistance of other countries who are more developed. Some people think of international development as being related strictly to economic success, but more recently development has been looked at more in the lens of human development, including quality of life, life expectancy, and more. Most "international devlopment" work is focused on bettering the development level of countries whose citizens primarily live in poverty, but it goes beyond just the economic aspect.</p></div>
-		    <div class="text-center"><p class="lead">~~~Here I will be inserting some research, including statistics about development and the general population's understanding of it as well as information about development theory and practice.~~~</p></div>
-		    <div class="text-center"><p class="lead">The International Development Navigator: MoM is a website designed to showcase different additions that could streamline the Mercer on Mission website and ensure that visitors can access the information as easily and as intuitively as possible. In order to do this, I included an interactive map that includes all of the information for different Mercer on Mission programs including a link to the actual page, in order to actually apply and get a deeper understanding of the program. This would, ideally, be replaced with a page created in a similar fashion to this one, but for the time being the official page is being used as a placeholder. The map and programs list has access to a database containing all necessary information, allowing for a one-stop source for the program information. I included a mock page for adding information to the database to show how easy it is to add information as needed without needing to access the database directly. I also included a contact page that directly sends an email to the account connected to this website, and a footer that includes connections such as Twitter and Facebook.</p></div>
+		    <div style="text-align:justify;text-indent:50px"><p class="lead">International Development is a broad concept. It gives the idea that different countries around the world are at different "levels" of development, and that over time these countries will progress with the assistance of other countries who are more developed. Some people think of international development as being related strictly to economic success, but more recently development objectives have been focused on meeting the "basic needs of people, such as, primary education, healthcare, clean water, nutrition and food,and housing" (Fukada-Parr, 126). However, we cannot separate the importance of economic success in international development. Fukada-Parr claims that, "although welfare improvement is the ultimate goal, it is assumed that economic growth is not only a necessary but a sufficient condition to achieve this objective" (Fukada-Parr, 124). Most "international development" work is focused on bettering the human development level of countries whose citizens primarily live in poverty, but the human development aspect cannot be separated from the economic success of the country.</p></div>
+		    <div style="text-align:justify;text-indent:50px"><p class="lead">It is also important to note that international development can take more forms than just that of resource management and infrastructure development. The FAIMER Institute is "based in the United States, with an international distribution of Fellows” whose goal is to provide education to healthcare providers in less developed countries (Burdick, 39). With Fellows residing in India, South Africa and Brazil, it was noted that "one-third to two-thirds of respondents noted improved teaching quality", showing that the education of those who teach in less developed countries is fundamentally important to the development of the country and cannot be disregarded in the field of international development (Burdick, 38).</p></div>
+		    <div style="text-align:justify;text-indent:50px"><p class="lead">Another important aspect that must be taken into account is the context in which the project is being implemented. Ginsberg points out that there are two fundamental problems in many models of projects, those being "that complex project considerations are inaccessibly presented and second, that the non-government organization (NGO) undertaking the project is itself a critical factor in assessing the local project context" (Ginsberg, 432). This illustrates how important it is for those participating in development projects to fully udnerstand the context that they and the project are in, and that they ensure they are as knowledgeable as possible about the country and the project they are participating in. A lack of understanding may have been what caused "development assistance" to be "pronounced dead many times by analysts" (Esteves, 2). In the world of development, being aware of all of the variables in your project is more important than ever.</p></div>
+		    <div style="text-align:justify;text-indent:50px"><p class="lead">The International Development Navigator: MoM is a website designed to showcase different additions that could streamline the Mercer on Mission website and ensure that visitors can access the information as easily and as intuitively as possible. In order to do this, I included an interactive map that includes all of the information for different Mercer on Mission programs including a link to the actual page, in order to actually apply and get a deeper understanding of the program. This would, ideally, be replaced with a page created in a similar fashion to this one, but for the time being the official page is being used as a placeholder. The map and programs list has access to a database containing all necessary information, allowing for a one-stop source for the program information. I included a mock page for adding information to the database to show how easy it is to add information as needed without needing to access the database directly. I also included a contact page that directly sends an email to the account connected to this website, and a footer that includes connections such as Twitter and Facebook.</p></div>
                 </div>
             </div>
-        </section>
+	</section>
+        <!-- Works Cited Section-->
+        <div class="copyright py-4 text-white">
+            <div class="container" style="text-align:justify;padding-left:5px;text-indent:-5px">
+                <small style="text-align:center">
+                    Works Cited 
+		</small>
+		<br>
+		<small style="text-align:justify">
+		    Brière, S., Tremblay, M., & Daou, A. (2015). Challenges facing international projects for entrepreneurial development in South Africa. Development Southern Africa, 32(6), 711-725. doi:10.1080/0376835x.2015.1063981
+		</small>
+		<br>
+		<small style="text-align:justify">
+		Burdick, W. P., Friedman, S. R., & Diserens, D. (2012). Faculty development projects for international health professions educators: Vehicles for institutional change? Medical Teacher, 34(1), 38-44. doi:10.3109/0142159x.2011.558538
+		</small>
+		<br>
+		<small style="text-align:justify">
+		Esteves, P., & Zoccal, G. (2020). International development cooperation AND Multipolarity: Scrambling north And South? Revista Brasileira De Política Internacional, 63(2). doi:10.1590/0034-7329202000213	
+		</small>
+		<br>
+		<small>
+		Fukuda-Parr, S. (2011). Theory and policy in international development: Human development and capability approach and the millennium development goals. International Studies Review, 13(1), 122-132. doi:10.1111/j.1468-2486.2010.01003.x
+		</small>
+		<br>
+		<small>
+		Ginsberg, N. (2016). Determining the context of an international development project. The Journal of Developing Areas, 50(5), 431-442. doi:10.1353/jda.2016.0055
+		</small>
+            </div>
+        </div>
         <!-- Portfolio Section-->
         <section class="page-section portfolio" id="steps" style="background-color:#f48500">
             <div class="container">
@@ -182,8 +231,13 @@ $result = $con->query($query);
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Map Section Content-->
-		<div  class="row justify-content-center" id="googleMap" style="border-radius:10px;width:900px;height:700px"><script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8vM2mTOjFej38VSmTTHOWRp5lBrGi8vY&callback=myMap"></script>	 
+		<div  class="row justify-content-center" id="googleMap" style="border-radius:10px;width:100%;height:600px"><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8vM2mTOjFej38VSmTTHOWRp5lBrGi8vY&callback=myMap"></script>	 
                 </div>
+		<div class="row justify-content-center">
+		<small>
+		Latitude and Longitude coordinates taken from https://www.latlong.net/.
+		</small>
+		</div>
             </div>
 	</section>
 
@@ -238,41 +292,72 @@ while($row = $result->fetch_assoc()) {
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                        <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <form name="sentMessage" novalidate="novalidate" action="index.php" method="POST">
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Name</label>
-                                    <input class="form-control" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." />
+                                    <input class="form-control" id="name2" name="name2" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Email Address</label>
-                                    <input class="form-control" id="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Email Address" required="required" data-validation-required-message="Please enter your email address." />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Phone Number</label>
-                                    <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number." />
+                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="Phone Number" required="required" data-validation-required-message="Please enter your phone number." />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Message</label>
-                                    <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <br />
                             <div id="success"></div>
-                            <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>
-                        </form>
+			    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>
+			</form>
+<?php
+if(isset($_POST['name2'])){
+	$sql2 = "INSERT INTO Responses (Name, Email, Phone, Message)
+		VALUES ('$_POST[name2]','$_POST[email]','$_POST[phone]','$_POST[message]')";
+	if($con->query($sql2) === TRUE){
+		echo "Message received! Thank you for your feedback!";
+	} else {
+		  echo "Error...";
+	}
+}
+?>
                     </div>
-                </div>
+		</div>
+		<br>
+<!-- Responses table -->
+		<div class="row justify-content-center">
+			<p class="lead"><b>Responses So Far</b></p>
+		</div>
+                <div class="row justify-content-center">
+		   <table style="width:100%">
+			<tr>
+			    <th>Name</th>
+			    <th>Message</th>
+			</tr>
+<?php
+$query = "SELECT * FROM Responses";
+$result = $con->query($query);
+while($row = $result->fetch_assoc()) {
+	echo "<tr><td>".$row["Name"]."</td><td>".$row["Message"]."</td></tr>";
+}
+?>
+		   </table> 
+		</div>
             </div>
 	</section>
 
@@ -365,7 +450,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://atlantachallenge.com/wp-content/uploads/2015/06/business-planning-background-1600x900.png" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">The first step was one of the hardest. Due to my double major in IST and IAF, Dr. Houry thought it would be interesting to combine the two for my senior project and create something that demonstrates how they can work together. After talking to both Dr. Houry and Dr. Allen, I decided on making this website as a way to showcase potential upgrades and features to add to the Mercer on Mission website. I also wanted to ensure that there was a lot of information available to visitors who were unsure what exactly international development entails, as Dr. Allen pointed out that many people are not aware of the full scope of international development. Through this process, I would be able to learn and practice more about IST as well as incorporating International Affairs into it through research and education. By February, I had a general idea of what I wanted to do. It would take late February/early March to really settle on the full project scope.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -399,7 +484,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://indypendently.com/imager/uploads/general/605/05_scorp_llc_sp_v04_c0ac4e6aadd1000ea4be27a574251c3b.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">The next step was deciding on the features that I wanted the website to have. During the initial meeting with Dr. Houry and Dr. Allen, I found that Dr. Allen had many questions about what "International Development" meant. This lead me to incorporate the "About" section that gives a general view of what the term means, as well as the various forms this can take. This allows for visitors who are not entirely knowledgeable about the field of study to learn more about the programs' purposes. I then asked friends about what they thought about the already established Mercer on Mission website and what they think I could incorporate to improve upon it. After discussing with a few different people, I found a few similarities between the discussions. First of all, they found the program layout somewhat hard to grasp, and felt like that could have been improved upon. This gave me the idea for creating a map with the locations of the programs that were being offered, so as to give a visual experience to visitors that would help them understand the scope of the programs. Finally, I thought that a quick "Contact" page would be beneficial, so that visitors have a quick and easy way to contact the administrators of the site as well as the directors of the programs.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -433,7 +518,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://storage.googleapis.com/hackersandslackers-cdn/2019/02/SQLpt1-3.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">My next step was creating the database. This involved a deeper look into SQL, and the way that they are incorporated into the website. I decided on creating a single database that holds all of the information that is required, as it makes it easy to pick and choose whatever information I need and also simplify the process of adding to the SQL database.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -467,7 +552,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://apastyle.apa.org/images/research-publication-category_tcm11-282728_w1024_n.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+				    <p class="mb-5">This was one of the longer parts of this project. It involved me getting the information for the "About" section, as well as getting information from the current MoM website in order to move the information here and incorporate it into the map and programs section. It was tough for me primarily deciding what information I wanted to include, as I did not want a huge wall of text for each part but I also wanted to ensure that the information provided was enough, and gave enough information for any potential visitors to the site.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -501,7 +586,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://thinkport.org/microsites/middleschoolmath/images/P9_trashball2.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">Believe it or not, this was an accident, and happened on the Saturday before BEAR Day. However, I did learn from it, as it helped me recognize the importance of keeping a backup at all times. It also helped me to realize the importance of doing everything mindfully, as using the command "rm" instead of "mv" was enough to delete everything I had. From this point onwards, I begins backing up all of the work I was doing so that it would not happen again. </p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -535,7 +620,7 @@ while($row = $result->fetch_assoc()) {
                                     <!-- Portfolio Modal - Image-->
                                     <img class="img-fluid rounded mb-5" src="https://media.freebiesglobal.com/2020/12/the-complete-html-css-bootstrap-build-hands-on-projects.jpg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">This step was primarily focused on re-doing the work I had done previously, which admittedly was easier given the fact that I knew what I wanted and generally remembered how to do most of it, barring a few exceptions. It was also at this point that I committed to ensuring that the styling was correct, and that everything looked the way I wanted it to.</p>
                                     <button class="btn btn-primary" data-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
@@ -562,19 +647,6 @@ while($row = $result->fetch_assoc()) {
 <?php
 $query = "SELECT * FROM MapMarkers";
 $result = $con->query($query);
-
-$name = $_POST["name"];
-$lat = $_POST["lat"];
-$lng = $_POST["lng"];
-$comment = $_POST["comment"];
-$professor = $_POST["professor"];
-$link = $_POST["link"];
-$sql = "INSERT INTO MapMarkers (Name, Lat, Lng, Comment, Professor, Link)
-		VALUES ('$name', '$lat', '$lng', '$comment', '$professor', '$link')";
-
-if ($con->query($sql) === TRUE) {
-		echo "New record created successfully";
-}
 ?>
 
 <script>
@@ -592,7 +664,7 @@ function myMap(){
 	}
 	return new google.maps.Map(document.getElementById("googleMap"),mapProp);
 }
-
+const map = myMap();
 var InfoWindow = new google.maps.InfoWindow();
 function createMarker(latlng,content){
 	var marker = new google.maps.Marker({position: latlng, map:map});
@@ -602,11 +674,14 @@ function createMarker(latlng,content){
 	});
 }
 
-const map = myMap();
 for(var entry of arr){
 	var contentStr = `<h1>${entry["Name"]}</h1> <br/> <p>${entry["Comment"]}</p>`;
 	var latlng = {lat:entry["Lat"], lng: entry["Lng"]};
 	createMarker(latlng,contentStr);
+}
+
+if (window.history.replaceState) {
+	window.history.replaceState(null, null, window.location.href);
 }
 
 </script>
